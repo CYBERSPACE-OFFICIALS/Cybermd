@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Admin</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:#f0f2f5; }
+        .navbar { background:#2c3e50; color:white; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-size:1.5rem; font-weight:bold; }
+        .hamburger { font-size:2rem; cursor:pointer; user-select:none; }
+        .dropdown { position:relative; display:inline-block; }
+        .dropdown-content { display:none; position:absolute; right:0; background:white; min-width:160px; box-shadow:0 8px 16px rgba(0,0,0,0.2); border-radius:4px; }
+        .dropdown-content a { color:black; padding:12px 16px; text-decoration:none; display:block; }
+        .dropdown-content a:hover { background:#f1f1f1; }
+        .show { display:block; }
+        .container { max-width:1200px; margin:2rem auto; padding:0 2rem; }
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-top:2rem; }
+        .stat-card { background:white; padding:1.5rem; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+        .stat-card h3 { color:#7f8c8d; font-size:0.9rem; text-transform:uppercase; margin-bottom:0.5rem; }
+        .stat-card .value { font-size:2rem; font-weight:bold; color:#2c3e50; }
+        #loginModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+        .modal-content { background:white; padding:2rem; border-radius:8px; width:90%; max-width:400px; }
+        .modal-content input { width:100%; padding:0.75rem; margin:0.5rem 0 1rem; border:1px solid #ddd; border-radius:4px; }
+        .modal-content button { background:#2c3e50; color:white; border:none; padding:0.75rem; border-radius:4px; cursor:pointer; width:100%; }
+        .error { color:#e74c3c; margin-top:0.5rem; }
+        #logoutBtn { background:#e74c3c; color:white; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; margin-top:1rem; }
+        .hidden { display:none !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🤖 BOT ADMIN</div>
+        <div class="dropdown">
+            <span class="hamburger" onclick="toggleMenu()">☰</span>
+            <div id="dropdownMenu" class="dropdown-content">
+                <a href="#" onclick="showLoginModal()">Admin Login</a>
+                <a href="#" onclick="logout()" id="logoutLink" class="hidden">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="loginModal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <input type="text" id="username" placeholder="Username" value="kboy">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div id="loginError" class="error"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Server Dashboard</h1>
+        <div id="statsContainer" class="stats-grid"></div>
+        <button id="logoutBtn" class="hidden" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function toggleMenu() { document.getElementById('dropdownMenu').classList.toggle('show'); }
+        window.onclick = function(e) {
+            if (!e.target.matches('.hamburger')) {
+                document.getElementById('dropdownMenu').classList.remove('show');
+            }
+        }
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+            toggleMenu();
+        }
+        function hideLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const res = await fetch('/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                hideLoginModal();
+                checkLoginStatus();
+                loadStats();
+            } else {
+                document.getElementById('loginError').innerText = data.error;
+            }
+        }
+
+        async function checkLoginStatus() {
+            const res = await fetch('/admin/status');
+            const data = await res.json();
+            if (data.loggedIn) {
+                document.getElementById('logoutLink').classList.remove('hidden');
+                document.getElementById('logoutBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('logoutLink').classList.add('hidden');
+                document.getElementById('logoutBtn').classList.add('hidden');
+            }
+        }
+
+        async function loadStats() {
+            const res = await fetch('/admin/stats');
+            if (res.status === 403) {
+                document.getElementById('statsContainer').innerHTML = '<p>Please login to view stats.</p>';
+                return;
+            }
+            const stats = await res.json();
+            document.getElementById('statsContainer').innerHTML = `
+                <div class="stat-card"><h3>Uptime</h3><div class="value">${stats.uptime}</div></div>
+                <div class="stat-card"><h3>Heap Memory</h3><div class="value">${stats.memory.used}</div></div>
+                <div class="stat-card"><h3>Total RAM</h3><div class="value">${stats.memory.total}</div></div>
+                <div class="stat-card"><h3>Free RAM</h3><div class="value">${stats.memory.free}</div></div>
+                <div class="stat-card"><h3>Platform</h3><div class="value">${stats.platform}</div></div>
+                <div class="stat-card"><h3>Node Version</h3><div class="value">${stats.nodeVersion}</div></div>
+                <div class="stat-card"><h3>Telegram Users</h3><div class="value">${stats.users.telegram}</div></div>
+                <div class="stat-card"><h3>WhatsApp Sessions</h3><div class="value">${stats.users.whatsapp}</div></div>
+            `;
+        }
+
+        async function logout() {
+            await fetch('/admin/logout', { method: 'POST' });
+            checkLoginStatus();
+            document.getElementById('statsContainer').innerHTML = '<p>Logged out.</p>';
+        }
+
+        checkLoginStatus();
+        setInterval(() => {
+            if (!document.getElementById('logoutBtn').classList.contains('hidden')) loadStats();
+        }, 5000);
+    </script>
+</body>
+</html>
