@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: cyber-space-bot
+    runtime: node
+    repo: https://github.com/CYBERSPACE-OFFICIALS / Cybermd
+    plan: free
+    buildCommand: npm install
+    startCommand: node start.js
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false  # This means "set manually in dashboard"
+      - key: WEB_PORT
+        value: 3000
+      - key: NODE_VERSION
+        value: 18.18.0
