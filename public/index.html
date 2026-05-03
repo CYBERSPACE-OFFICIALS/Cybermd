@@ -123,16 +123,16 @@
       font-weight:600;font-family:'Space Grotesk',sans-serif;transition:all 0.2s;
     }
     .cmd-tab.active,.cmd-tab:hover{background:rgba(0,245,196,0.1);border-color:var(--cyan);color:var(--cyan)}
-    .cmd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+    .cmd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
     .cmd-item{
       background:var(--card);border:1px solid var(--border);border-radius:10px;
-      padding:12px 16px;display:flex;align-items:center;gap:10px;
+      padding:12px 16px;display:flex;align-items:flex-start;gap:10px;
     }
     .cmd-name{
-      font-family:'JetBrains Mono',monospace;font-size:0.85rem;
+      font-family:'JetBrains Mono',monospace;font-size:0.82rem;
       color:var(--cyan);font-weight:700;
     }
-    .cmd-desc{font-size:0.78rem;color:var(--muted);margin-top:2px}
+    .cmd-desc{font-size:0.75rem;color:var(--muted);margin-top:2px}
 
     .terminal{
       background:#060b14;border:1px solid var(--border);border-radius:16px;
@@ -149,20 +149,10 @@
     .t-muted{color:var(--muted)}
     .t-white{color:#e2e8f0}
 
-    .deploy-section{
-      background:linear-gradient(135deg,rgba(0,245,196,0.05) 0%,rgba(57,255,20,0.03) 100%);
-      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-      text-align:center;
-    }
-    .deploy-card{max-width:640px;margin:0 auto;}
-    .deploy-card .section-sub{max-width:100%}
-    .deploy-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-
     footer{
       padding:48px 20px;border-top:1px solid var(--border);
       text-align:center;color:var(--muted);font-size:0.85rem;
     }
-    footer a{color:var(--cyan);text-decoration:none}
     .footer-links{display:flex;justify-content:center;gap:28px;margin-bottom:24px;flex-wrap:wrap}
     .footer-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;transition:color 0.2s}
     .footer-links a:hover{color:var(--cyan)}
@@ -185,7 +175,6 @@
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
-    <a href="#deploy">Deploy</a>
     <a href="/session" class="nav-btn">Connect Bot</a>
   </div>
 </nav>
@@ -200,17 +189,13 @@
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg>
         Connect Your Bot
       </a>
-      <a href="https://github.com/CYBERSPACE-OFFICIALS/Cybermd" target="_blank" class="btn-ghost">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        View on GitHub
-      </a>
     </div>
   </div>
 </section>
 
 <div class="stats">
-  <div class="stat"><div class="stat-value">100+</div><div class="stat-label">Commands</div></div>
-  <div class="stat"><div class="stat-value">6</div><div class="stat-label">Feature Categories</div></div>
+  <div class="stat"><div class="stat-value">300+</div><div class="stat-label">Commands</div></div>
+  <div class="stat"><div class="stat-value">8</div><div class="stat-label">Feature Categories</div></div>
   <div class="stat"><div class="stat-value">MD</div><div class="stat-label">Multi-Device</div></div>
   <div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Always Online</div></div>
 </div>
@@ -243,13 +228,23 @@
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#128269;</div>
-        <h3>Search & Info</h3>
+        <h3>Search &amp; Info</h3>
         <p>Google search, Wikipedia lookup, real-time weather, latest news and dictionary definitions — all inside WhatsApp.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127881;</div>
+        <h3>Fun &amp; Games</h3>
+        <p>Rizz lines, memes, trivia, tictactoe, hangman, coin battles, roast, truth or dare — keep your group entertained.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127925;</div>
+        <h3>Audio Effects</h3>
+        <p>Bass boost, nightcore, robot, echo, slow, fast, deep, earrape and more audio FX applied to any voice note or audio.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#9881;</div>
         <h3>Owner Controls</h3>
-        <p>Toggle public/private mode, block users, check bot ping and uptime, restart remotely and manage everything as the owner.</p>
+        <p>Toggle public/private mode, block users, check bot ping and uptime, broadcast messages and manage everything as the owner.</p>
       </div>
     </div>
 
@@ -264,10 +259,12 @@
         <div><span class="t-green">cybermd@bot</span><span class="t-muted">:</span><span class="t-cyan">~</span><span class="t-muted">$ </span><span class="t-white">.menu</span></div>
         <div class="t-cyan">[ CYBERMD v2.0.0 ] — CYBERSPACE-OFFICIALS</div>
         <div class="t-muted">─────────────────────────────────</div>
-        <div><span class="t-green">GROUP</span> <span class="t-muted">» .kick .add .promote .mute .tagall</span></div>
-        <div><span class="t-green">MEDIA</span> <span class="t-muted">» .tiktok .ig .fb .play .video</span></div>
-        <div><span class="t-green">AI   </span> <span class="t-muted">» .ai .gpt .imagine .tts .tr</span></div>
-        <div><span class="t-green">STICK</span> <span class="t-muted">» .sticker .toimg .tomp3 .take</span></div>
+        <div><span class="t-green">GROUP</span> <span class="t-muted">» .kick .add .promote .demote .mute .tagall</span></div>
+        <div><span class="t-green">MEDIA</span> <span class="t-muted">» .tiktok .ig .fb .play .video .ytmp3</span></div>
+        <div><span class="t-green">AI   </span> <span class="t-muted">» .ai .gpt .gpt4 .imagine .tts .tr</span></div>
+        <div><span class="t-green">STICK</span> <span class="t-muted">» .sticker .toimg .take .steal .removebg</span></div>
+        <div><span class="t-green">FUN  </span> <span class="t-muted">» .rizz .meme .trivia .truth .dare .tictactoe</span></div>
+        <div><span class="t-green">FX   </span> <span class="t-muted">» .bass .nightcore .robot .echo .earrape</span></div>
         <div class="t-muted">─────────────────────────────────</div>
         <div><span class="t-cyan">STATUS:</span> <span class="t-green">ONLINE ●</span></div>
       </div>
@@ -282,79 +279,228 @@
     <div class="commands-tabs">
       <button class="cmd-tab active" onclick="showTab(event,'group')">Group</button>
       <button class="cmd-tab" onclick="showTab(event,'media')">Media</button>
-      <button class="cmd-tab" onclick="showTab(event,'downloader')">Downloader</button>
-      <button class="cmd-tab" onclick="showTab(event,'ai')">AI & Fun</button>
-      <button class="cmd-tab" onclick="showTab(event,'owner')">Owner</button>
+      <button class="cmd-tab" onclick="showTab(event,'ai')">AI</button>
+      <button class="cmd-tab" onclick="showTab(event,'sticker')">Sticker</button>
+      <button class="cmd-tab" onclick="showTab(event,'fun')">Fun &amp; Games</button>
+      <button class="cmd-tab" onclick="showTab(event,'fx')">Audio FX</button>
       <button class="cmd-tab" onclick="showTab(event,'search')">Search</button>
+      <button class="cmd-tab" onclick="showTab(event,'owner')">Owner</button>
     </div>
 
+    <!-- GROUP -->
     <div id="group" class="cmd-panel active cmd-grid">
       <div class="cmd-item"><div><div class="cmd-name">.kick</div><div class="cmd-desc">Remove a member</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.add</div><div class="cmd-desc">Add a member</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.promote</div><div class="cmd-desc">Make user admin</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.demote</div><div class="cmd-desc">Remove admin rights</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.mute</div><div class="cmd-desc">Mute group</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.unmute</div><div class="cmd-desc">Unmute group</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.link</div><div class="cmd-desc">Get group invite link</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.revoke</div><div class="cmd-desc">Revoke group link</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.mute</div><div class="cmd-desc">Mute the group</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.unmute</div><div class="cmd-desc">Unmute the group</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.tagall</div><div class="cmd-desc">Tag all members</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.hidetag</div><div class="cmd-desc">Tag without names</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tag</div><div class="cmd-desc">Tag specific members</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.grouplink</div><div class="cmd-desc">Get invite link</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.resetlink</div><div class="cmd-desc">Reset group invite link</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setgcname</div><div class="cmd-desc">Set group name</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setgcpp</div><div class="cmd-desc">Set group picture</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.kickall</div><div class="cmd-desc">Kick all members</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.kickadmins</div><div class="cmd-desc">Kick all admins</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.listadmins</div><div class="cmd-desc">List group admins</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.warn</div><div class="cmd-desc">Warn a user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.removewarn</div><div class="cmd-desc">Remove user warning</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.warnings</div><div class="cmd-desc">Show user warnings</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ban</div><div class="cmd-desc">Ban a user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.unban</div><div class="cmd-desc">Unban a user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.antispam</div><div class="cmd-desc">Toggle anti-spam</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.antilink</div><div class="cmd-desc">Toggle anti-link</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.antibadword</div><div class="cmd-desc">Toggle bad word filter</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.antidelete</div><div class="cmd-desc">Toggle anti-delete</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.antigcmention</div><div class="cmd-desc">Toggle anti-GC mention</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.approve</div><div class="cmd-desc">Approve join requests</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.reject</div><div class="cmd-desc">Reject join requests</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gcstatus</div><div class="cmd-desc">Get group status</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.slowmode</div><div class="cmd-desc">Toggle slow mode</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.poll</div><div class="cmd-desc">Create a group poll</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setbirthday</div><div class="cmd-desc">Set member birthday</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.birthdaylist</div><div class="cmd-desc">List birthdays</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.welcome</div><div class="cmd-desc">Toggle welcome message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setwelcome</div><div class="cmd-desc">Set welcome message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.goodbye</div><div class="cmd-desc">Toggle goodbye message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.jail</div><div class="cmd-desc">Jail a member</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.unjail</div><div class="cmd-desc">Unjail a member</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.delete</div><div class="cmd-desc">Delete a message</div></div></div>
     </div>
+
+    <!-- MEDIA -->
     <div id="media" class="cmd-panel cmd-grid">
-      <div class="cmd-item"><div><div class="cmd-name">.sticker</div><div class="cmd-desc">Image/video to sticker</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.toimg</div><div class="cmd-desc">Sticker to image</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.tomp3</div><div class="cmd-desc">Extract audio from video</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.tomp4</div><div class="cmd-desc">Convert to mp4</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.take</div><div class="cmd-desc">Add pack name to sticker</div></div></div>
-    </div>
-    <div id="downloader" class="cmd-panel cmd-grid">
+      <div class="cmd-item"><div><div class="cmd-name">.tiktok / .tt</div><div class="cmd-desc">TikTok no watermark</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ig / .igdl</div><div class="cmd-desc">Download Instagram</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.fb / .fbdl</div><div class="cmd-desc">Download Facebook video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.twitter / .tw</div><div class="cmd-desc">Download Twitter video</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.play</div><div class="cmd-desc">Download YouTube audio</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.song</div><div class="cmd-desc">Search and send song</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.video</div><div class="cmd-desc">Download YouTube video</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.tiktok</div><div class="cmd-desc">TikTok no watermark</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.ig</div><div class="cmd-desc">Download Instagram reel</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.fb</div><div class="cmd-desc">Download Facebook video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.video / .vid</div><div class="cmd-desc">Download YouTube video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ytmp3</div><div class="cmd-desc">YouTube to MP3</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tomp3</div><div class="cmd-desc">Extract audio from video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tomp4</div><div class="cmd-desc">Convert to MP4</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ssave</div><div class="cmd-desc">Save WhatsApp status</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.pin / .pindl</div><div class="cmd-desc">Download from Pinterest</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animedl</div><div class="cmd-desc">Download anime clip</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.dramabox</div><div class="cmd-desc">Download drama video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.apkmod</div><div class="cmd-desc">Get modded APK</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.xvideo</div><div class="cmd-desc">Search &amp; download video</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.shorturl</div><div class="cmd-desc">Shorten a URL</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ss / .ssweb</div><div class="cmd-desc">Screenshot a website</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.vv</div><div class="cmd-desc">View once bypass</div></div></div>
     </div>
+
+    <!-- AI -->
     <div id="ai" class="cmd-panel cmd-grid">
-      <div class="cmd-item"><div><div class="cmd-name">.ai</div><div class="cmd-desc">AI response</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.gpt</div><div class="cmd-desc">GPT-powered reply</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.imagine</div><div class="cmd-desc">AI image generation</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.tr</div><div class="cmd-desc">Translate text</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.tts</div><div class="cmd-desc">Text to speech</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.lyrics</div><div class="cmd-desc">Fetch song lyrics</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ai / .cyberai</div><div class="cmd-desc">AI response</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gpt / .gpt4</div><div class="cmd-desc">GPT-powered reply</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gpt5</div><div class="cmd-desc">GPT-5 response</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.luna / .mdai</div><div class="cmd-desc">Luna AI assistant</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.codeai</div><div class="cmd-desc">AI code generation</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.storyai</div><div class="cmd-desc">AI story generation</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.triviaai</div><div class="cmd-desc">AI trivia question</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.img / .imagine</div><div class="cmd-desc">AI image generation</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.aivoice / .vai</div><div class="cmd-desc">AI voice generation</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.chatbot</div><div class="cmd-desc">Toggle AI chatbot mode</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tts / .say</div><div class="cmd-desc">Text to speech</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tr / .translate</div><div class="cmd-desc">Translate text</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.lyrics / .lirik</div><div class="cmd-desc">Fetch song lyrics</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.emojimix</div><div class="cmd-desc">Mix two emojis</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.font / .fancy</div><div class="cmd-desc">Fancy text fonts</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.quote / .qc</div><div class="cmd-desc">Fake quote sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.remini</div><div class="cmd-desc">Enhance image quality</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.cartoon</div><div class="cmd-desc">Cartoonify image</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.manga</div><div class="cmd-desc">Manga-style image</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gfx</div><div class="cmd-desc">GFX profile picture</div></div></div>
     </div>
-    <div id="owner" class="cmd-panel cmd-grid">
-      <div class="cmd-item"><div><div class="cmd-name">.alive</div><div class="cmd-desc">Check bot status</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.ping</div><div class="cmd-desc">Bot response speed</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.menu</div><div class="cmd-desc">Show all commands</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.mode</div><div class="cmd-desc">Public or private mode</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.block</div><div class="cmd-desc">Block a user</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.restart</div><div class="cmd-desc">Restart bot</div></div></div>
+
+    <!-- STICKER -->
+    <div id="sticker" class="cmd-panel cmd-grid">
+      <div class="cmd-item"><div><div class="cmd-name">.sticker / .s</div><div class="cmd-desc">Image/video to sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.toimg</div><div class="cmd-desc">Sticker to image</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.take / .steal</div><div class="cmd-desc">Steal sticker pack name</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.stickerwm / .wm</div><div class="cmd-desc">Add watermark to sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.removebg / .rmbg</div><div class="cmd-desc">Remove image background</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tosticker</div><div class="cmd-desc">Convert reply to sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tgstickers</div><div class="cmd-desc">Telegram sticker pack</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.toviewonce</div><div class="cmd-desc">Convert to view-once</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animehug</div><div class="cmd-desc">Anime hug sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animekiss</div><div class="cmd-desc">Anime kiss sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animeslap</div><div class="cmd-desc">Anime slap sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animepat</div><div class="cmd-desc">Anime pat sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animedance</div><div class="cmd-desc">Anime dance sticker</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animecry</div><div class="cmd-desc">Anime cry sticker</div></div></div>
     </div>
+
+    <!-- FUN -->
+    <div id="fun" class="cmd-panel cmd-grid">
+      <div class="cmd-item"><div><div class="cmd-name">.rizz / .pickupline</div><div class="cmd-desc">Rizz pick-up line</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.meme</div><div class="cmd-desc">Random meme</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.roast</div><div class="cmd-desc">Roast someone</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.compliment</div><div class="cmd-desc">Compliment someone</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.advice</div><div class="cmd-desc">Random advice</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.truth</div><div class="cmd-desc">Truth question</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.dare</div><div class="cmd-desc">Dare challenge</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.trivia</div><div class="cmd-desc">Trivia question</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.8ball</div><div class="cmd-desc">Magic 8-ball answer</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.dice</div><div class="cmd-desc">Roll a dice</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.coin</div><div class="cmd-desc">Flip a coin</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.rps</div><div class="cmd-desc">Rock paper scissors</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.hangman</div><div class="cmd-desc">Play hangman</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tictactoe</div><div class="cmd-desc">Play tic-tac-toe</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.numbattle</div><div class="cmd-desc">Number battle game</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.coinbattle</div><div class="cmd-desc">Coin battle game</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.marry</div><div class="cmd-desc">Marry someone</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.couple</div><div class="cmd-desc">Show your couple</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ship</div><div class="cmd-desc">Ship two people</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.poem</div><div class="cmd-desc">Generate a poem</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.joke / .dadjoke</div><div class="cmd-desc">Random joke</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.funfact</div><div class="cmd-desc">Random fun fact</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gamefact</div><div class="cmd-desc">Gaming fact</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gaycheck</div><div class="cmd-desc">Gay percentage check</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.smartcheck</div><div class="cmd-desc">Smart check</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.aura</div><div class="cmd-desc">Check your aura</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.topchat</div><div class="cmd-desc">Top chatters leaderboard</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.balance</div><div class="cmd-desc">Check wallet balance</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.daily</div><div class="cmd-desc">Claim daily reward</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.gamble</div><div class="cmd-desc">Gamble coins</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.slot</div><div class="cmd-desc">Play slot machine</div></div></div>
+    </div>
+
+    <!-- AUDIO FX -->
+    <div id="fx" class="cmd-panel cmd-grid">
+      <div class="cmd-item"><div><div class="cmd-name">.bass</div><div class="cmd-desc">Bass boost audio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.nightcore</div><div class="cmd-desc">Nightcore effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.robot</div><div class="cmd-desc">Robot voice effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.echo</div><div class="cmd-desc">Echo effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.earrape</div><div class="cmd-desc">Earrape audio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.fast</div><div class="cmd-desc">Speed up audio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.slow</div><div class="cmd-desc">Slow down audio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.deep</div><div class="cmd-desc">Deep voice effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.reverse</div><div class="cmd-desc">Reverse audio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.smooth</div><div class="cmd-desc">Smooth audio effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.helium</div><div class="cmd-desc">Helium voice</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.underwater</div><div class="cmd-desc">Underwater effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.concert</div><div class="cmd-desc">Concert hall echo</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.8bit</div><div class="cmd-desc">8-bit retro sound</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.demon</div><div class="cmd-desc">Demon voice</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.radio</div><div class="cmd-desc">Radio filter effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.vibrato</div><div class="cmd-desc">Vibrato effect</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tremolo</div><div class="cmd-desc">Tremolo effect</div></div></div>
+    </div>
+
+    <!-- SEARCH -->
     <div id="search" class="cmd-panel cmd-grid">
-      <div class="cmd-item"><div><div class="cmd-name">.google</div><div class="cmd-desc">Google search</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.wiki</div><div class="cmd-desc">Wikipedia lookup</div></div></div>
-      <div class="cmd-item"><div><div class="cmd-name">.weather</div><div class="cmd-desc">City weather</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.wiki</div><div class="cmd-desc">Wikipedia search</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.weather</div><div class="cmd-desc">Real-time weather</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.movie</div><div class="cmd-desc">Movie info</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.news</div><div class="cmd-desc">Latest news</div></div></div>
       <div class="cmd-item"><div><div class="cmd-name">.define</div><div class="cmd-desc">Dictionary definition</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.urban</div><div class="cmd-desc">Urban dictionary</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.recipe</div><div class="cmd-desc">Recipe search</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.book</div><div class="cmd-desc">Book lookup</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.npm</div><div class="cmd-desc">NPM package info</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.iplookup</div><div class="cmd-desc">IP address lookup</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.qrcode</div><div class="cmd-desc">Generate QR code</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.readqr</div><div class="cmd-desc">Read QR code</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.currency</div><div class="cmd-desc">Currency converter</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animesearch</div><div class="cmd-desc">Search anime info</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.animetop</div><div class="cmd-desc">Top anime list</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.ffstalk</div><div class="cmd-desc">Free Fire player info</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.npmstalk</div><div class="cmd-desc">NPM user stalk</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.mlstalk</div><div class="cmd-desc">MLBB player stalk</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.tempmail</div><div class="cmd-desc">Create temp email</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.checkmails</div><div class="cmd-desc">Check temp emails</div></div></div>
     </div>
-  </div>
-</section>
 
-<section id="deploy" class="deploy-section">
-  <div class="section-inner">
-    <div class="deploy-card">
-      <div class="section-label">// deploy</div>
-      <h2 class="section-title">Get your bot online in minutes</h2>
-      <p class="section-sub">Deploy to Render for free, then click Connect Bot to link your WhatsApp number and go live.</p>
-      <div class="deploy-btns">
-        <a href="https://render.com/deploy?repo=https://github.com/CYBERSPACE-OFFICIALS/Cybermd" target="_blank" class="btn-main">
-          Deploy to Render
-        </a>
-        <a href="/session" class="btn-ghost">
-          Connect WhatsApp
-        </a>
-      </div>
+    <!-- OWNER -->
+    <div id="owner" class="cmd-panel cmd-grid">
+      <div class="cmd-item"><div><div class="cmd-name">.menu</div><div class="cmd-desc">Show all commands</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.alive / .ping</div><div class="cmd-desc">Check bot status</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.runtime / .uptime</div><div class="cmd-desc">Bot uptime</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.mode</div><div class="cmd-desc">Public or private mode</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setprefix</div><div class="cmd-desc">Change bot prefix</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.broadcast / .bc</div><div class="cmd-desc">Broadcast to all chats</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.addpremium</div><div class="cmd-desc">Add premium user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.delpremium</div><div class="cmd-desc">Remove premium user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.addsudo</div><div class="cmd-desc">Add sudo user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.delsudo</div><div class="cmd-desc">Remove sudo user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.block / .unblock</div><div class="cmd-desc">Block/unblock a user</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.setbotpp</div><div class="cmd-desc">Set bot profile picture</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.eval / .js</div><div class="cmd-desc">Run JavaScript code</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.speed</div><div class="cmd-desc">Bot speed test</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.pair</div><div class="cmd-desc">Pair new device</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.delpair</div><div class="cmd-desc">Delete paired session</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.listpair</div><div class="cmd-desc">List all paired sessions</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.sched</div><div class="cmd-desc">Schedule a message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.scheddaily</div><div class="cmd-desc">Schedule daily message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.unsched</div><div class="cmd-desc">Cancel scheduled message</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.autoreply</div><div class="cmd-desc">Toggle auto reply</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.autoread</div><div class="cmd-desc">Auto-read messages</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.autobio</div><div class="cmd-desc">Auto-update bio</div></div></div>
+      <div class="cmd-item"><div><div class="cmd-name">.autoviewstatus</div><div class="cmd-desc">Auto-view statuses</div></div></div>
     </div>
   </div>
 </section>
@@ -364,9 +510,8 @@
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
     <a href="/session">Connect Bot</a>
-    <a href="https://github.com/CYBERSPACE-OFFICIALS/Cybermd" target="_blank">GitHub</a>
   </div>
-  <p>Built by <a href="https://github.com/CYBERSPACE-OFFICIALS" target="_blank">CYBERSPACE-OFFICIALS</a> &mdash; Cybermd WhatsApp Bot</p>
+  <p>Built by CYBERSPACE-OFFICIALS &mdash; Cybermd WhatsApp Bot</p>
 </footer>
 
 <script>
@@ -377,5 +522,6 @@
     event.target.classList.add('active');
   }
 </script>
+
 </body>
 </html>
