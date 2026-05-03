@@ -66,6 +66,10 @@ async function startConnection(usePairingCode = false, phoneNumber = "") {
     setTimeout(async () => {
       try {
         const cleaned = phoneNumber.replace(/[^0-9]/g, "");
+        broadcast("status", {
+          status: "awaiting-pairing",
+          message: "Open WhatsApp > Linked Devices > Link with phone number",
+        });
         const code = await sock.requestPairingCode(cleaned);
         pairingCode = code?.match(/.{1,4}/g)?.join("-") || code;
         connectionStatus = "awaiting-pairing";
