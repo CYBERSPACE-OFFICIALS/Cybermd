@@ -46,7 +46,9 @@ function wipeAuth() {
 function closeSocket() {
     if (sock) {
         try { sock.ev.removeAllListeners(); } catch (_) {}
-        try { sock.end(); } catch (_) {}
+        // Close the WebSocket directly — avoids sending a WhatsApp logout signal
+        // which would invalidate the session before pair.js can take over
+        try { sock.ws?.close(); } catch (_) {}
         sock = null;
     }
 }
@@ -101,11 +103,11 @@ async function startConnection(usePairing = false, phoneNumber = '') {
         },
         printQRInTerminal: false,
         logger,
-        browser: Browsers.ubuntu('Edge'),
+        browser: Browsers.macOS('Safari'),
         generateHighQualityLinkPreview: false,
         connectTimeoutMs: 60000,
         defaultQueryTimeoutMs: 60000,
-        keepAliveIntervalMs: 30000,
+        keepAliveIntervalMs: 10000,
         markOnlineOnConnect: true,
     });
 
@@ -167,8 +169,20 @@ async function startConnection(usePairing = false, phoneNumber = '') {
 
             if (code === DisconnectReason.loggedOut) {
                 wipeAuth();
-                broadcast('status', { status: 'logged-out', message: 'Logged out. Reconnect to pair again.' });
-            } else if (!inPairingMode) {
+                inPairingMode = false;
+                broadcast('status', { status: 'logged-out', message: 'Logged out. Please pair again.' });
+            } else if (inPairingMode) {
+                // Connection dropped mid-pairing — wipe and retry automatically
+                console.log('[CYBERMD] Connection dropped during pairing, retrying...');
+                broadcast('status', { status: 'retrying', message: 'Connection dropped — retrying pairing...' });
+                wipeAuth();
+                reconnTimer = setTimeout(async () => {
+                    try { await startConnection(true, phoneNumber); } catch (e) {
+                        broadcast('error', { message: 'Retry failed: ' + e.message });
+                        inPairingMode = false;
+                    }
+                }, 3000);
+            } else {
                 broadcast('status', { status: 'reconnecting', message: 'Reconnecting...' });
                 reconnTimer = setTimeout(() => startConnection(), 5000);
             }
