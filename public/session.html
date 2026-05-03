@@ -367,12 +367,14 @@
       document.getElementById('retryBtn').style.display = 'none';
       document.getElementById('statusBanner').textContent = 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
       document.getElementById('codeSection').classList.add('show');
+      document.getElementById('connectedSection').classList.remove('show');
       startTimer();
     }
 
     function showConnected(number) {
       document.getElementById('inputSection').style.display = 'none';
       document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('retryBtn').style.display = 'none';
       document.getElementById('connectedSection').classList.add('show');
       if (number) document.getElementById('connectedNum').textContent = '+' + number;
       if (timer) clearInterval(timer);
@@ -382,6 +384,8 @@
       if (timer) clearInterval(timer);
       if (sse) { sse.close(); sse = null; }
       document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('connectedSection').classList.remove('show');
+      document.getElementById('errorMsg').classList.remove('show');
       document.getElementById('inputSection').style.display = 'block';
       resetBtn();
     }
@@ -403,6 +407,7 @@
           if (data.status === 'awaiting-pairing') {
             document.getElementById('statusBanner').textContent = data.message || 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
             document.getElementById('codeSection').classList.add('show');
+            document.getElementById('connectedSection').classList.remove('show');
           }
         } catch(err) {}
       });
