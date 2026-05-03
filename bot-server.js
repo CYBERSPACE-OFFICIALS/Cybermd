@@ -110,8 +110,13 @@ async function startConnection(usePairing = false, phoneNumber = '') {
     });
 
     // ── request pairing code ──
+    // Wait for 'connecting' state before requesting — more reliable than a fixed delay
     if (usePairing && phoneNumber && !state.creds.registered) {
-        setTimeout(async () => {
+        let codeRequested = false;
+
+        const tryRequestCode = async () => {
+            if (codeRequested || !sock) return;
+            codeRequested = true;
             try {
                 let code = await sock.requestPairingCode(phoneNumber);
                 code = code?.match(/.{1,4}/g)?.join('-') || code;
@@ -122,7 +127,17 @@ async function startConnection(usePairing = false, phoneNumber = '') {
                 console.error('[CYBERMD] Code error:', err.message);
                 broadcast('error', { message: 'Could not get pairing code: ' + err.message });
             }
-        }, 3000);
+        };
+
+        // Trigger when socket reaches connecting state (3 s after that is safe)
+        sock.ev.on('connection.update', ({ connection }) => {
+            if (connection === 'connecting' && !codeRequested) {
+                setTimeout(tryRequestCode, 3000);
+            }
+        });
+
+        // Hard fallback — if connecting event never fired within 8 s, try anyway
+        setTimeout(tryRequestCode, 8000);
     }
 
     sock.ev.on('creds.update', saveCreds);
