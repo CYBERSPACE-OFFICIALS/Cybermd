@@ -70,9 +70,9 @@ async function startConnection(usePairingCode = false, phoneNumber = "") {
           status: "awaiting-pairing",
           message: "Open WhatsApp > Linked Devices > Link with phone number",
         });
+        connectionStatus = "awaiting-pairing";
         const code = await sock.requestPairingCode(cleaned);
         pairingCode = code?.match(/.{1,4}/g)?.join("-") || code;
-        connectionStatus = "awaiting-pairing";
         broadcast("pairing-code", { code: pairingCode });
         console.log("[Cybermd] Pairing code:", pairingCode);
       } catch (err) {
