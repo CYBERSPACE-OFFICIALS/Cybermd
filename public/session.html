@@ -48,7 +48,6 @@
       padding: 28px;
     }
 
-    /* ── Input phase ── */
     .label {
       display: block;
       font-size: 0.75rem;
@@ -104,7 +103,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Error ── */
     .error-msg {
       display: none;
       margin-top: 14px;
@@ -118,7 +116,6 @@
     }
     .error-msg.show { display: block; }
 
-    /* ── Code phase ── */
     .code-section { display: none; }
     .code-section.show { display: block; }
 
@@ -210,6 +207,22 @@
     }
     .code-expiry .timer { color: #f59e0b; font-weight: 700; }
 
+    .copy-btn {
+      width: 100%;
+      padding: 10px;
+      background: rgba(0,245,196,0.1);
+      color: #00f5c4;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(0,245,196,0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 12px;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,245,196,0.18); }
+
     .btn-retry {
       width: 100%;
       padding: 13px;
@@ -225,7 +238,6 @@
     }
     .btn-retry:hover { border-color: #00f5c4; color: #00f5c4; }
 
-    /* ── Connected phase ── */
     .connected-section { display: none; text-align: center; }
     .connected-section.show { display: block; }
     .check-circle {
@@ -239,6 +251,7 @@
     }
     .connected-title { font-size: 1.2rem; font-weight: 800; color: #22c55e; margin-bottom: 6px; }
     .connected-num { color: #94a3b8; font-size: 0.9rem; }
+    .connected-sub { color: #64748b; font-size: 0.82rem; margin-top: 10px; }
 
     .footer { text-align: center; margin-top: 20px; color: #334155; font-size: 0.76rem; }
     .footer a { color: #00f5c4; text-decoration: none; }
@@ -277,7 +290,7 @@
       <!-- CODE PHASE -->
       <div class="code-section" id="codeSection">
         <div class="status-banner" id="statusBanner">
-          Open WhatsApp now, then go to Linked Devices → Link with phone number.
+          Open WhatsApp now, then go to Linked Devices &rarr; Link with phone number.
         </div>
 
         <div class="whatsapp-alert">
@@ -310,6 +323,8 @@
           <div class="code-expiry">Expires in <span class="timer" id="timerText">60s</span></div>
         </div>
 
+        <button class="copy-btn" onclick="copyCode()">&#128203; Copy Code</button>
+
         <button class="btn-retry" id="retryBtn" style="display:none" onclick="resetToInput()">
           Code expired &mdash; Try again
         </button>
@@ -320,19 +335,20 @@
         <div class="check-circle">&#10003;</div>
         <div class="connected-title">Bot Connected!</div>
         <div class="connected-num" id="connectedNum"></div>
-        <p style="color:#64748b;font-size:0.82rem;margin-top:10px;">Cybermd is now active on your WhatsApp.</p>
+        <p class="connected-sub">Cybermd is now active on your WhatsApp.<br>Send <strong>.menu</strong> to get started.</p>
       </div>
 
     </div>
 
     <div class="footer">
-      Powered by <a href="https://cyberspace-officials.github.io" target="_blank">CYBERSPACE-OFFICIALS</a>
+      Powered by <a href="https://github.com/CYBERSPACE-OFFICIALS" target="_blank">CYBERSPACE-OFFICIALS</a>
     </div>
   </div>
 
   <script>
     let sse = null;
     let timer = null;
+    let currentCode = '';
 
     function showError(msg) {
       const el = document.getElementById('errorMsg');
@@ -362,6 +378,7 @@
     }
 
     function showCode(code) {
+      currentCode = code;
       document.getElementById('inputSection').style.display = 'none';
       document.getElementById('codeValue').textContent = code;
       document.getElementById('retryBtn').style.display = 'none';
@@ -378,6 +395,16 @@
       document.getElementById('connectedSection').classList.add('show');
       if (number) document.getElementById('connectedNum').textContent = '+' + number;
       if (timer) clearInterval(timer);
+      if (sse) { sse.close(); sse = null; }
+    }
+
+    function copyCode() {
+      if (!currentCode) return;
+      navigator.clipboard.writeText(currentCode).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy Code'; }, 2000);
+      }).catch(() => {});
     }
 
     function resetToInput() {
@@ -392,23 +419,12 @@
 
     function connectSSE() {
       if (sse) sse.close();
-      sse = new EventSource('/events');
+      sse = new EventSource('/api/events');
 
       sse.addEventListener('pairing-code', function(e) {
         try {
           const data = JSON.parse(e.data);
           showCode(data.code);
-        } catch(err) {}
-      });
-
-      sse.addEventListener('status', function(e) {
-        try {
-          const data = JSON.parse(e.data);
-          if (data.status === 'awaiting-pairing') {
-            document.getElementById('statusBanner').textContent = data.message || 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
-            document.getElementById('codeSection').classList.add('show');
-            document.getElementById('connectedSection').classList.remove('show');
-          }
         } catch(err) {}
       });
 
@@ -419,8 +435,18 @@
         } catch(err) {}
       });
 
+      sse.addEventListener('error', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showError(data.message || 'Something went wrong');
+          resetBtn();
+          document.getElementById('inputSection').style.display = 'block';
+          document.getElementById('codeSection').classList.remove('show');
+        } catch(err) {}
+      });
+
       sse.onerror = function() {
-        setTimeout(connectSSE, 5000);
+        // SSE reconnects automatically; only close on intentional reset
       };
     }
 
@@ -446,7 +472,7 @@
           showError(data.message || 'Something went wrong. Try again.');
           resetBtn();
         } else {
-          btn.textContent = 'Waiting for code...';
+          btn.innerHTML = '<span class="spinner"></span>Waiting for code...';
           connectSSE();
         }
       } catch(err) {
@@ -459,7 +485,7 @@
       try {
         const res = await fetch('/api/status');
         const data = await res.json();
-        if (data.connected) showConnected('');
+        if (data.connected) showConnected(data.number || '');
       } catch(e) {}
     }
 
