@@ -1,207 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cybermd — Pair Your WhatsApp</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Segoe UI',sans-serif;background:#060b14;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-    .back{position:fixed;top:20px;left:20px}
-    .back a{color:#475569;text-decoration:none;font-size:.875rem;display:flex;align-items:center;gap:6px;transition:color .2s}
-    .back a:hover{color:#00f5c4}
-    .container{width:100%;max-width:440px}
-    .logo{text-align:center;margin-bottom:32px}
-    .logo h1{font-size:1.9rem;font-weight:900}
-    .logo h1 span{color:#00f5c4}
-    .logo p{color:#64748b;font-size:.875rem;margin-top:6px}
-    .card{background:#0f1a2e;border:1px solid #1a2d4a;border-radius:20px;padding:28px}
-    .label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:10px}
-    input[type=tel]{width:100%;padding:14px 16px;background:#060b14;border:1.5px solid #1a2d4a;border-radius:12px;color:#e2e8f0;font-size:1.05rem;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:8px}
-    input[type=tel]:focus{border-color:#00f5c4}
-    input[type=tel]::placeholder{color:#334155}
-    .hint{font-size:.76rem;color:#475569;margin-bottom:20px}
-    .btn-pair{width:100%;padding:15px;background:#00f5c4;color:#060b14;font-size:1rem;font-weight:800;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:background .2s,transform .1s}
-    .btn-pair:hover{background:#00ddb0}
-    .btn-pair:active{transform:scale(.98)}
-    .btn-pair:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .spinner{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(6,11,20,.3);border-top-color:#060b14;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .error-msg{display:none;margin-top:14px;padding:12px 14px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#f87171;font-size:.85rem;text-align:center}
-    .error-msg.show{display:block}
-    .code-section{display:none}
-    .code-section.show{display:block}
-    .status-banner{background:linear-gradient(135deg,rgba(34,197,94,.16),rgba(0,245,196,.08));border:1px solid rgba(34,197,94,.45);border-radius:14px;padding:14px 16px;margin-bottom:18px;text-align:center;color:#d1fae5;font-weight:700;font-size:.9rem;line-height:1.5}
-    .wa-box{background:#052e16;border:2px solid #22c55e;border-radius:14px;padding:18px;margin-bottom:20px}
-    .wa-title{font-size:1rem;font-weight:800;color:#22c55e;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px}
-    .steps{display:flex;flex-direction:column;gap:10px}
-    .step{display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:#bbf7d0}
-    .step-num{background:#16a34a;color:#fff;font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-    .code-box{background:#060b14;border:2px solid #00f5c4;border-radius:14px;padding:22px;text-align:center;margin-bottom:12px}
-    .code-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin-bottom:12px}
-    .code-value{font-size:2.8rem;font-weight:900;letter-spacing:10px;color:#00f5c4;font-family:'Courier New',monospace}
-    .code-expiry{margin-top:10px;font-size:.76rem;color:#475569}
-    .timer{color:#f59e0b;font-weight:700}
-    .copy-btn{width:100%;padding:10px;background:rgba(0,245,196,.1);color:#00f5c4;font-size:.85rem;font-weight:700;border:1px solid rgba(0,245,196,.3);border-radius:10px;cursor:pointer;font-family:inherit;margin-bottom:12px;transition:background .2s}
-    .copy-btn:hover{background:rgba(0,245,196,.18)}
-    .btn-retry{width:100%;padding:13px;background:transparent;color:#94a3b8;font-size:.875rem;font-weight:600;border:1px solid #1a2d4a;border-radius:12px;cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s}
-    .btn-retry:hover{border-color:#00f5c4;color:#00f5c4}
-    .connected-section{display:none;text-align:center}
-    .connected-section.show{display:block}
-    .check-circle{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,.1);border:2px solid #22c55e;font-size:1.8rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-    .connected-title{font-size:1.2rem;font-weight:800;color:#22c55e;margin-bottom:6px}
-    .connected-num{color:#94a3b8;font-size:.9rem}
-    .connected-sub{color:#64748b;font-size:.82rem;margin-top:10px}
-    .footer{text-align:center;margin-top:20px;color:#334155;font-size:.76rem}
-    .footer a{color:#00f5c4;text-decoration:none}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #060b14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .back {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+    }
+    .back a {
+      color: #475569;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back a:hover { color: #00f5c4; }
+
+    .container { width: 100%; max-width: 440px; }
+
+    .logo { text-align: center; margin-bottom: 32px; }
+    .logo h1 { font-size: 1.9rem; font-weight: 900; }
+    .logo h1 span { color: #00f5c4; }
+    .logo p { color: #64748b; font-size: 0.875rem; margin-top: 6px; }
+
+    .card {
+      background: #0f1a2e;
+      border: 1px solid #1a2d4a;
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    input[type="tel"] {
+      width: 100%;
+      padding: 14px 16px;
+      background: #060b14;
+      border: 1.5px solid #1a2d4a;
+      border-radius: 12px;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 8px;
+    }
+    input[type="tel"]:focus { border-color: #00f5c4; }
+    input[type="tel"]::placeholder { color: #334155; }
+    .hint { font-size: 0.76rem; color: #475569; margin-bottom: 20px; }
+
+    .btn-pair {
+      width: 100%;
+      padding: 15px;
+      background: #00f5c4;
+      color: #060b14;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-pair:hover { background: #00ddb0; }
+    .btn-pair:active { transform: scale(0.98); }
+    .btn-pair:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2.5px solid rgba(6,11,20,0.3);
+      border-top-color: #060b14;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-msg {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      color: #f87171;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .error-msg.show { display: block; }
+
+    .code-section { display: none; }
+    .code-section.show { display: block; }
+
+    .status-banner {
+      background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(0,245,196,0.08));
+      border: 1px solid rgba(34,197,94,0.45);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      text-align: center;
+      color: #d1fae5;
+      font-weight: 700;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .whatsapp-alert {
+      background: #052e16;
+      border: 2px solid #22c55e;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .whatsapp-alert .alert-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .whatsapp-alert .steps {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .whatsapp-alert .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: #bbf7d0;
+    }
+    .whatsapp-alert .step-num {
+      background: #16a34a;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .code-box {
+      background: #060b14;
+      border: 2px solid #00f5c4;
+      border-radius: 14px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .code-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+    .code-value {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 10px;
+      color: #00f5c4;
+      font-family: 'Courier New', monospace;
+    }
+    .code-expiry {
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: #475569;
+    }
+    .code-expiry .timer { color: #f59e0b; font-weight: 700; }
+
+    .copy-btn {
+      width: 100%;
+      padding: 10px;
+      background: rgba(0,245,196,0.1);
+      color: #00f5c4;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(0,245,196,0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 12px;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,245,196,0.18); }
+
+    .btn-retry {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px solid #1a2d4a;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-retry:hover { border-color: #00f5c4; color: #00f5c4; }
+
+    .connected-section { display: none; text-align: center; }
+    .connected-section.show { display: block; }
+    .check-circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.1);
+      border: 2px solid #22c55e;
+      font-size: 1.8rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .connected-title { font-size: 1.2rem; font-weight: 800; color: #22c55e; margin-bottom: 6px; }
+    .connected-num { color: #94a3b8; font-size: 0.9rem; }
+    .connected-sub { color: #64748b; font-size: 0.82rem; margin-top: 10px; }
+
+    .footer { text-align: center; margin-top: 20px; color: #334155; font-size: 0.76rem; }
+    .footer a { color: #00f5c4; text-decoration: none; }
   </style>
 </head>
 <body>
-<div class="back"><a href="/">&#8592; Back</a></div>
-<div class="container">
-  <div class="logo">
-    <h1>&gt;_ <span>Cybermd</span></h1>
-    <p>Pair your WhatsApp number to activate the bot</p>
-  </div>
-  <div class="card">
+  <div class="back"><a href="/">&#8592; Back</a></div>
 
-    <!-- INPUT -->
-    <div id="inputSection">
-      <label class="label">Your WhatsApp Number</label>
-      <input type="tel" id="phoneInput" placeholder="e.g. 2348012345678" inputmode="numeric" onkeydown="if(event.key==='Enter')requestPair()"/>
-      <p class="hint">Include country code, no + or spaces — e.g. 2348012345678</p>
-      <button class="btn-pair" id="pairBtn" onclick="requestPair()">Pair My Number</button>
-      <div class="error-msg" id="errorMsg"></div>
+  <div class="container">
+    <div class="logo">
+      <h1>&gt;_ <span>Cybermd</span></h1>
+      <p>Pair your WhatsApp number to activate the bot</p>
     </div>
 
-    <!-- CODE -->
-    <div class="code-section" id="codeSection">
-      <div class="status-banner">Open WhatsApp &#8594; Linked Devices &#8594; Link with phone number</div>
-      <div class="wa-box">
-        <div class="wa-title">&#128241; Follow these steps</div>
-        <div class="steps">
-          <div class="step"><span class="step-num">1</span><span>Open <strong>WhatsApp</strong> on your phone</span></div>
-          <div class="step"><span class="step-num">2</span><span>Tap the <strong>3-dot menu &#8942;</strong> &#8594; <strong>Linked Devices</strong></span></div>
-          <div class="step"><span class="step-num">3</span><span>Tap <strong>"Link with phone number"</strong></span></div>
-          <div class="step"><span class="step-num">4</span><span>Enter the <strong>8-digit code</strong> below</span></div>
+    <div class="card">
+
+      <!-- INPUT PHASE -->
+      <div id="inputSection">
+        <label class="label">Your WhatsApp Number</label>
+        <input
+          type="tel"
+          id="phoneInput"
+          placeholder="e.g. 2348012345678"
+          inputmode="numeric"
+          onkeydown="if(event.key==='Enter') requestPair()"
+        />
+        <p class="hint">Include country code, no + or spaces &mdash; e.g. 2348012345678</p>
+
+        <button class="btn-pair" id="pairBtn" onclick="requestPair()">
+          Pair My Number
+        </button>
+
+        <div class="error-msg" id="errorMsg"></div>
+      </div>
+
+      <!-- CODE PHASE -->
+      <div class="code-section" id="codeSection">
+        <div class="status-banner" id="statusBanner">
+          Open WhatsApp now, then go to Linked Devices &rarr; Link with phone number.
         </div>
+
+        <div class="whatsapp-alert">
+          <div class="alert-title">
+            &#128241; Open WhatsApp now!
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <span>Open <strong>WhatsApp</strong> on your phone</span>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <span>Tap the <strong>3-dot menu &#8942;</strong> &rarr; <strong>Linked Devices</strong></span>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <span>Tap <strong>"Link with phone number"</strong></span>
+            </div>
+            <div class="step">
+              <span class="step-num">4</span>
+              <span>Type the <strong>8-digit code</strong> shown below</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-box">
+          <div class="code-label">Enter this code in WhatsApp</div>
+          <div class="code-value" id="codeValue">--------</div>
+          <div class="code-expiry">Expires in <span class="timer" id="timerText">60s</span></div>
+        </div>
+
+        <button class="copy-btn" onclick="copyCode()">&#128203; Copy Code</button>
+
+        <button class="btn-retry" id="retryBtn" style="display:none" onclick="resetToInput()">
+          Code expired &mdash; Try again
+        </button>
       </div>
-      <div class="code-box">
-        <div class="code-label">Your pairing code</div>
-        <div class="code-value" id="codeValue">--------</div>
-        <div class="code-expiry">Expires in <span class="timer" id="timerTxt">60s</span></div>
+
+      <!-- CONNECTED PHASE -->
+      <div class="connected-section" id="connectedSection">
+        <div class="check-circle">&#10003;</div>
+        <div class="connected-title">Bot Connected!</div>
+        <div class="connected-num" id="connectedNum"></div>
+        <p class="connected-sub">Cybermd is now active on your WhatsApp.<br>Send <strong>.menu</strong> to get started.</p>
       </div>
-      <button class="copy-btn" onclick="copyCode()">&#128203; Copy Code</button>
-      <button class="btn-retry" id="retryBtn" style="display:none" onclick="reset()">Code expired — Try again</button>
+
     </div>
 
-    <!-- CONNECTED -->
-    <div class="connected-section" id="connectedSection">
-      <div class="check-circle">&#10003;</div>
-      <div class="connected-title">Bot Connected!</div>
-      <div class="connected-num" id="connectedNum"></div>
-      <p class="connected-sub">Cybermd is now active on your WhatsApp.<br>Send <strong>.menu</strong> to see all commands.</p>
+    <div class="footer">
+      Powered by <a href="https://github.com/CYBERSPACE-OFFICIALS" target="_blank">CYBERSPACE-OFFICIALS</a>
     </div>
-
   </div>
-  <div class="footer">Powered by <a href="https://github.com/CYBERSPACE-OFFICIALS" target="_blank">CYBERSPACE-OFFICIALS</a></div>
-</div>
 
-<script>
-  var sse=null, tmr=null, curCode='';
+  <script>
+    let sse = null;
+    let timer = null;
+    let currentCode = '';
 
-  function err(msg){var e=document.getElementById('errorMsg');e.textContent=msg;e.classList.add('show');}
-  function resetBtn(){var b=document.getElementById('pairBtn');b.disabled=false;b.textContent='Pair My Number';}
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.classList.add('show');
+    }
 
-  function startTimer(){
-    var s=60,el=document.getElementById('timerTxt');
-    if(tmr)clearInterval(tmr);
-    tmr=setInterval(function(){
-      s--;if(el)el.textContent=s+'s';
-      if(s<=0){clearInterval(tmr);if(el)el.textContent='expired';document.getElementById('retryBtn').style.display='block';}
-    },1000);
-  }
+    function resetBtn() {
+      const btn = document.getElementById('pairBtn');
+      btn.disabled = false;
+      btn.textContent = 'Pair My Number';
+    }
 
-  function showCode(code){
-    curCode=code;
-    document.getElementById('inputSection').style.display='none';
-    document.getElementById('codeValue').textContent=code;
-    document.getElementById('retryBtn').style.display='none';
-    document.getElementById('codeSection').classList.add('show');
-    document.getElementById('connectedSection').classList.remove('show');
-    startTimer();
-  }
+    function startTimer() {
+      let secs = 60;
+      const el = document.getElementById('timerText');
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        secs--;
+        if (el) el.textContent = secs + 's';
+        if (secs <= 0) {
+          clearInterval(timer);
+          if (el) el.textContent = 'expired';
+          document.getElementById('retryBtn').style.display = 'block';
+        }
+      }, 1000);
+    }
 
-  function showConnected(number){
-    document.getElementById('inputSection').style.display='none';
-    document.getElementById('codeSection').classList.remove('show');
-    document.getElementById('connectedSection').classList.add('show');
-    if(number)document.getElementById('connectedNum').textContent='+'+number;
-    if(tmr)clearInterval(tmr);
-    if(sse){sse.close();sse=null;}
-  }
+    function showCode(code) {
+      currentCode = code;
+      document.getElementById('inputSection').style.display = 'none';
+      document.getElementById('codeValue').textContent = code;
+      document.getElementById('retryBtn').style.display = 'none';
+      document.getElementById('statusBanner').textContent = 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
+      document.getElementById('codeSection').classList.add('show');
+      document.getElementById('connectedSection').classList.remove('show');
+      startTimer();
+    }
 
-  function copyCode(){
-    if(!curCode)return;
-    navigator.clipboard.writeText(curCode).then(function(){
-      var b=document.querySelector('.copy-btn');
-      b.textContent='Copied!';
-      setTimeout(function(){b.textContent='\uD83D\uDCCB Copy Code';},2000);
-    }).catch(function(){});
-  }
+    function showConnected(number) {
+      document.getElementById('inputSection').style.display = 'none';
+      document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('retryBtn').style.display = 'none';
+      document.getElementById('connectedSection').classList.add('show');
+      if (number) document.getElementById('connectedNum').textContent = '+' + number;
+      if (timer) clearInterval(timer);
+      if (sse) { sse.close(); sse = null; }
+    }
 
-  function reset(){
-    if(tmr)clearInterval(tmr);
-    if(sse){sse.close();sse=null;}
-    document.getElementById('codeSection').classList.remove('show');
-    document.getElementById('connectedSection').classList.remove('show');
-    document.getElementById('errorMsg').classList.remove('show');
-    document.getElementById('inputSection').style.display='block';
-    resetBtn();
-  }
+    function copyCode() {
+      if (!currentCode) return;
+      navigator.clipboard.writeText(currentCode).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy Code'; }, 2000);
+      }).catch(() => {});
+    }
 
-  function openSSE(){
-    if(sse)sse.close();
-    sse=new EventSource('/events');
+    function resetToInput() {
+      if (timer) clearInterval(timer);
+      if (sse) { sse.close(); sse = null; }
+      document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('connectedSection').classList.remove('show');
+      document.getElementById('errorMsg').classList.remove('show');
+      document.getElementById('inputSection').style.display = 'block';
+      resetBtn();
+    }
 
-    sse.addEventListener('pairing-code',function(e){
-      try{var d=JSON.parse(e.data);showCode(d.code);}catch(x){}
-    });
+    function connectSSE() {
+      if (sse) sse.close();
+      sse = new EventSource('/api/events');
 
-    sse.addEventListener('connected',function(e){
-      try{var d=JSON.parse(e.data);showConnected(d.number||'');}catch(x){}
-    });
+      sse.addEventListener('pairing-code', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showCode(data.code);
+        } catch(err) {}
+      });
 
-    sse.addEventListener('error',function(e){
-      try{
-        var d=JSON.parse(e.data);
-        err(d.message||'Something went wrong');
+      sse.addEventListener('connected', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showConnected(data.number || '');
+        } catch(err) {}
+      });
+
+      sse.addEventListener('error', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showError(data.message || 'Something went wrong');
+          resetBtn();
+          document.getElementById('inputSection').style.display = 'block';
+          document.getElementById('codeSection').classList.remove('show');
+        } catch(err) {}
+      });
+
+      sse.onerror = function() {
+        // SSE reconnects automatically; only close on intentional reset
+      };
+    }
+
+    async function requestPair() {
+      document.getElementById('errorMsg').classList.remove('show');
+      const phone = document.getElementById('phoneInput').value.trim().replace(/\D/g, '');
+      if (!phone || phone.length < 7) {
+        showError('Please enter a valid phone number with country code.');
+        return;
+      }
+      const btn = document.getElementById('pairBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Requesting code...';
+
+      try {
+        const res = await fetch('/api/connect/pair', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phoneNumber: phone })
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showError(data.message || 'Something went wrong. Try again.');
+          resetBtn();
+        } else {
+          btn.innerHTML = '<span class="spinner"></span>Waiting for code...';
+          connectSSE();
+        }
+      } catch(err) {
+        showError('Could not reach the server. Try again.');
         resetBtn();
-        document.getElementById('inputSection').style.display='block';
-        document.getElementById('codeSection').classList.remove('show');
-      }catch(x){}
-    });
-  }
+      }
+    }
 
-  async function requestPair(){
-    document.getElementById('errorMsg').classList.remove('show');
-    var phone=document.getElementById('phoneInput').value.trim().replace(/\D/g,'');
-    if(!phone||phone.length<7){err('Enter a valid number with country code.');return;}
-    var btn=document.getElementById('pairBtn');
-    btn.disabled=true;
-    btn.innerHTML='<span class="spinner"></span>Requesting code...';
-    try{
-      var res=await fetch('/api/connect/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phoneNumber:phone})});
-      var data=await res.json();
-      if(!data.success){err(data.message||'Try again.');resetBtn();}
-      else{btn.innerHTML='<span class="spinner"></span>Waiting for code...';openSSE();}
-    }catch(e){err('Cannot reach server. Try again.');resetBtn();}
-  }
+    async function checkIfAlreadyConnected() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        if (data.connected) showConnected(data.number || '');
+      } catch(e) {}
+    }
 
-  // check if already connected on load
-  (async function(){
-    try{var r=await fetch('/api/status');var d=await r.json();if(d.connected)showConnected(d.number||'');}catch(e){}
-  })();
-</script>
+    checkIfAlreadyConnected();
+  </script>
 </body>
 </html>
