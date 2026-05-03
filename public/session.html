@@ -17,6 +17,7 @@
       justify-content: center;
       padding: 24px;
     }
+
     .back {
       position: fixed;
       top: 20px;
@@ -33,84 +34,50 @@
     }
     .back a:hover { color: #00f5c4; }
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-    }
+    .container { width: 100%; max-width: 440px; }
 
-    .logo {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .logo h1 {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
+    .logo { text-align: center; margin-bottom: 32px; }
+    .logo h1 { font-size: 1.9rem; font-weight: 900; }
     .logo h1 span { color: #00f5c4; }
-    .logo p {
-      color: #64748b;
-      font-size: 0.9rem;
-      margin-top: 6px;
-    }
+    .logo p { color: #64748b; font-size: 0.875rem; margin-top: 6px; }
 
     .card {
       background: #0f1a2e;
       border: 1px solid #1a2d4a;
       border-radius: 20px;
-      padding: 32px;
+      padding: 28px;
     }
 
+    /* ── Input phase ── */
     .label {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: #64748b;
       margin-bottom: 10px;
     }
-
-    .input-wrap {
-      position: relative;
-      margin-bottom: 20px;
-    }
-    .input-wrap .flag {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.1rem;
-      pointer-events: none;
-    }
     input[type="tel"] {
       width: 100%;
-      padding: 15px 16px 15px 44px;
+      padding: 14px 16px;
       background: #060b14;
       border: 1.5px solid #1a2d4a;
       border-radius: 12px;
       color: #e2e8f0;
       font-size: 1.05rem;
-      outline: none;
       font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 8px;
     }
-    input[type="tel"]:focus {
-      border-color: #00f5c4;
-      box-shadow: 0 0 0 3px rgba(0, 245, 196, 0.08);
-    }
+    input[type="tel"]:focus { border-color: #00f5c4; }
     input[type="tel"]::placeholder { color: #334155; }
-
-    .hint {
-      font-size: 0.78rem;
-      color: #475569;
-      margin-top: -14px;
-      margin-bottom: 20px;
-    }
+    .hint { font-size: 0.76rem; color: #475569; margin-bottom: 20px; }
 
     .btn-pair {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       background: #00f5c4;
       color: #060b14;
       font-size: 1rem;
@@ -119,21 +86,15 @@
       border-radius: 12px;
       cursor: pointer;
       font-family: inherit;
-      letter-spacing: 0.3px;
       transition: background 0.2s, transform 0.1s;
     }
     .btn-pair:hover { background: #00ddb0; }
     .btn-pair:active { transform: scale(0.98); }
-    .btn-pair:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn-pair:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
     .spinner {
       display: inline-block;
-      width: 18px;
-      height: 18px;
+      width: 16px; height: 16px;
       border: 2.5px solid rgba(6,11,20,0.3);
       border-top-color: #060b14;
       border-radius: 50%;
@@ -143,107 +104,13 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .code-box {
-      display: none;
-      margin-top: 28px;
-      text-align: center;
-      background: #060b14;
-      border: 1.5px solid #00f5c4;
-      border-radius: 16px;
-      padding: 28px 20px;
-    }
-    .code-box.show { display: block; }
-    .code-label {
-      font-size: 0.78rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 16px;
-    }
-    .code-value {
-      font-size: 2.6rem;
-      font-weight: 900;
-      letter-spacing: 10px;
-      color: #00f5c4;
-      font-family: 'Courier New', monospace;
-      line-height: 1;
-    }
-    .code-steps {
-      margin-top: 20px;
-      text-align: left;
-      background: #0f1a2e;
-      border-radius: 10px;
-      padding: 16px;
-    }
-    .code-steps p {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-bottom: 6px;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .code-steps p:last-child { margin-bottom: 0; }
-    .code-steps .num {
-      background: #1a2d4a;
-      color: #00f5c4;
-      font-weight: 700;
-      font-size: 0.7rem;
-      min-width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .code-expiry {
-      margin-top: 14px;
-      font-size: 0.75rem;
-      color: #475569;
-    }
-    .code-expiry span { color: #f59e0b; }
-
-    .connected-box {
-      display: none;
-      margin-top: 28px;
-      text-align: center;
-      background: #060b14;
-      border: 1.5px solid #22c55e;
-      border-radius: 16px;
-      padding: 28px 20px;
-    }
-    .connected-box.show { display: block; }
-    .check-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: rgba(34, 197, 94, 0.1);
-      border: 2px solid #22c55e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 14px;
-      font-size: 1.6rem;
-    }
-    .connected-text {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #22c55e;
-      margin-bottom: 4px;
-    }
-    .connected-num {
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
-
+    /* ── Error ── */
     .error-msg {
       display: none;
       margin-top: 14px;
-      padding: 12px 16px;
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 14px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.3);
       border-radius: 10px;
       color: #f87171;
       font-size: 0.85rem;
@@ -251,72 +118,221 @@
     }
     .error-msg.show { display: block; }
 
-    .footer {
+    /* ── Code phase ── */
+    .code-section { display: none; }
+    .code-section.show { display: block; }
+
+    .status-banner {
+      background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(0,245,196,0.08));
+      border: 1px solid rgba(34,197,94,0.45);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
       text-align: center;
-      margin-top: 24px;
-      color: #334155;
-      font-size: 0.78rem;
+      color: #d1fae5;
+      font-weight: 700;
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
+
+    .whatsapp-alert {
+      background: #052e16;
+      border: 2px solid #22c55e;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .whatsapp-alert .alert-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #22c55e;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .whatsapp-alert .steps {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .whatsapp-alert .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: #bbf7d0;
+    }
+    .whatsapp-alert .step-num {
+      background: #16a34a;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .code-box {
+      background: #060b14;
+      border: 2px solid #00f5c4;
+      border-radius: 14px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .code-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+    .code-value {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 10px;
+      color: #00f5c4;
+      font-family: 'Courier New', monospace;
+    }
+    .code-expiry {
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: #475569;
+    }
+    .code-expiry .timer { color: #f59e0b; font-weight: 700; }
+
+    .btn-retry {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px solid #1a2d4a;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-retry:hover { border-color: #00f5c4; color: #00f5c4; }
+
+    /* ── Connected phase ── */
+    .connected-section { display: none; text-align: center; }
+    .connected-section.show { display: block; }
+    .check-circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.1);
+      border: 2px solid #22c55e;
+      font-size: 1.8rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .connected-title { font-size: 1.2rem; font-weight: 800; color: #22c55e; margin-bottom: 6px; }
+    .connected-num { color: #94a3b8; font-size: 0.9rem; }
+
+    .footer { text-align: center; margin-top: 20px; color: #334155; font-size: 0.76rem; }
     .footer a { color: #00f5c4; text-decoration: none; }
   </style>
 </head>
 <body>
-  <div class="back">
-    <a href="/">&#8592; Back</a>
-  </div>
+  <div class="back"><a href="/">&#8592; Back</a></div>
 
   <div class="container">
     <div class="logo">
       <h1>&gt;_ <span>Cybermd</span></h1>
-      <p>Pair your WhatsApp number to start the bot</p>
+      <p>Pair your WhatsApp number to activate the bot</p>
     </div>
 
     <div class="card">
-      <label class="label">Your WhatsApp Number</label>
-      <div class="input-wrap">
-        <span class="flag">📱</span>
+
+      <!-- INPUT PHASE -->
+      <div id="inputSection">
+        <label class="label">Your WhatsApp Number</label>
         <input
           type="tel"
           id="phoneInput"
           placeholder="e.g. 2348012345678"
           inputmode="numeric"
+          onkeydown="if(event.key==='Enter') requestPair()"
         />
+        <p class="hint">Include country code, no + or spaces &mdash; e.g. 2348012345678</p>
+
+        <button class="btn-pair" id="pairBtn" onclick="requestPair()">
+          Pair My Number
+        </button>
+
+        <div class="error-msg" id="errorMsg"></div>
       </div>
-      <p class="hint">Include your country code, no + or spaces. Example: 2348012345678</p>
 
-      <button class="btn-pair" id="pairBtn" onclick="requestPair()">
-        Pair My Number
-      </button>
-
-      <div class="error-msg" id="errorMsg"></div>
-
-      <div class="code-box" id="codeBox">
-        <div class="code-label">Your Pairing Code</div>
-        <div class="code-value" id="codeValue">--------</div>
-        <div class="code-steps">
-          <p><span class="num">1</span> Open WhatsApp on your phone</p>
-          <p><span class="num">2</span> Tap ⋮ Menu &rarr; <strong>Linked Devices</strong></p>
-          <p><span class="num">3</span> Tap <strong>Link with phone number</strong></p>
-          <p><span class="num">4</span> Enter the code shown above</p>
+      <!-- CODE PHASE -->
+      <div class="code-section" id="codeSection">
+        <div class="status-banner" id="statusBanner">
+          Open WhatsApp now, then go to Linked Devices → Link with phone number.
         </div>
-        <div class="code-expiry">Code expires in <span>60 seconds</span></div>
+
+        <div class="whatsapp-alert">
+          <div class="alert-title">
+            &#128241; Open WhatsApp now!
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <span>Open <strong>WhatsApp</strong> on your phone</span>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <span>Tap the <strong>3-dot menu &#8942;</strong> &rarr; <strong>Linked Devices</strong></span>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <span>Tap <strong>"Link with phone number"</strong></span>
+            </div>
+            <div class="step">
+              <span class="step-num">4</span>
+              <span>Type the <strong>8-digit code</strong> shown below</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-box">
+          <div class="code-label">Enter this code in WhatsApp</div>
+          <div class="code-value" id="codeValue">--------</div>
+          <div class="code-expiry">Expires in <span class="timer" id="timerText">60s</span></div>
+        </div>
+
+        <button class="btn-retry" id="retryBtn" style="display:none" onclick="resetToInput()">
+          Code expired &mdash; Try again
+        </button>
       </div>
 
-      <div class="connected-box" id="connectedBox">
-        <div class="check-icon">✓</div>
-        <div class="connected-text">Successfully Connected!</div>
+      <!-- CONNECTED PHASE -->
+      <div class="connected-section" id="connectedSection">
+        <div class="check-circle">&#10003;</div>
+        <div class="connected-title">Bot Connected!</div>
         <div class="connected-num" id="connectedNum"></div>
+        <p style="color:#64748b;font-size:0.82rem;margin-top:10px;">Cybermd is now active on your WhatsApp.</p>
       </div>
+
     </div>
 
     <div class="footer">
-      Powered by <a href="https://github.com/CYBERSPACE-OFFICIALS/Cybermd" target="_blank">CYBERSPACE-OFFICIALS / Cybermd</a>
+      Powered by <a href="https://cyberspace-officials.github.io" target="_blank">CYBERSPACE-OFFICIALS</a>
     </div>
   </div>
 
   <script>
-    let eventSource = null;
-    let countdown = null;
+    let sse = null;
+    let timer = null;
 
     function showError(msg) {
       const el = document.getElementById('errorMsg');
@@ -324,78 +340,95 @@
       el.classList.add('show');
     }
 
-    function clearError() {
-      document.getElementById('errorMsg').classList.remove('show');
-    }
-
     function resetBtn() {
       const btn = document.getElementById('pairBtn');
       btn.disabled = false;
-      btn.innerHTML = 'Pair My Number';
+      btn.textContent = 'Pair My Number';
     }
 
-    function startCountdown() {
+    function startTimer() {
       let secs = 60;
-      const el = document.querySelector('.code-expiry span');
-      if (countdown) clearInterval(countdown);
-      countdown = setInterval(() => {
+      const el = document.getElementById('timerText');
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
         secs--;
-        if (el) el.textContent = secs + ' seconds';
+        if (el) el.textContent = secs + 's';
         if (secs <= 0) {
-          clearInterval(countdown);
-          if (el) el.textContent = 'expired — request a new one';
-          resetBtn();
+          clearInterval(timer);
+          if (el) el.textContent = 'expired';
+          document.getElementById('retryBtn').style.display = 'block';
         }
       }, 1000);
     }
 
     function showCode(code) {
+      document.getElementById('inputSection').style.display = 'none';
       document.getElementById('codeValue').textContent = code;
-      document.getElementById('codeBox').classList.add('show');
-      startCountdown();
+      document.getElementById('retryBtn').style.display = 'none';
+      document.getElementById('statusBanner').textContent = 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
+      document.getElementById('codeSection').classList.add('show');
+      startTimer();
     }
 
     function showConnected(number) {
-      document.getElementById('codeBox').classList.remove('show');
-      const box = document.getElementById('connectedBox');
-      box.classList.add('show');
+      document.getElementById('inputSection').style.display = 'none';
+      document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('connectedSection').classList.add('show');
       if (number) document.getElementById('connectedNum').textContent = '+' + number;
-      if (countdown) clearInterval(countdown);
+      if (timer) clearInterval(timer);
+    }
+
+    function resetToInput() {
+      if (timer) clearInterval(timer);
+      if (sse) { sse.close(); sse = null; }
+      document.getElementById('codeSection').classList.remove('show');
+      document.getElementById('inputSection').style.display = 'block';
+      resetBtn();
     }
 
     function connectSSE() {
-      if (eventSource) eventSource.close();
-      eventSource = new EventSource('/events');
+      if (sse) sse.close();
+      sse = new EventSource('/events');
 
-      eventSource.addEventListener('pairing-code', e => {
-        const { code } = JSON.parse(e.data);
-        showCode(code);
+      sse.addEventListener('pairing-code', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showCode(data.code);
+        } catch(err) {}
       });
 
-      eventSource.addEventListener('connected', e => {
-        const { number } = JSON.parse(e.data);
-        showConnected(number);
+      sse.addEventListener('status', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          if (data.status === 'awaiting-pairing') {
+            document.getElementById('statusBanner').textContent = data.message || 'Open WhatsApp now, then go to Linked Devices → Link with phone number.';
+            document.getElementById('codeSection').classList.add('show');
+          }
+        } catch(err) {}
       });
 
-      eventSource.onerror = () => {
+      sse.addEventListener('connected', function(e) {
+        try {
+          const data = JSON.parse(e.data);
+          showConnected(data.number || '');
+        } catch(err) {}
+      });
+
+      sse.onerror = function() {
         setTimeout(connectSSE, 5000);
       };
     }
 
     async function requestPair() {
-      clearError();
+      document.getElementById('errorMsg').classList.remove('show');
       const phone = document.getElementById('phoneInput').value.trim().replace(/\D/g, '');
       if (!phone || phone.length < 7) {
         showError('Please enter a valid phone number with country code.');
         return;
       }
-
       const btn = document.getElementById('pairBtn');
       btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span>Sending request...';
-
-      document.getElementById('codeBox').classList.remove('show');
-      document.getElementById('connectedBox').classList.remove('show');
+      btn.innerHTML = '<span class="spinner"></span>Requesting code...';
 
       try {
         const res = await fetch('/api/connect/pair', {
@@ -408,24 +441,24 @@
           showError(data.message || 'Something went wrong. Try again.');
           resetBtn();
         } else {
-          btn.innerHTML = 'Waiting for code...';
+          btn.textContent = 'Waiting for code...';
           connectSSE();
         }
-      } catch (err) {
+      } catch(err) {
         showError('Could not reach the server. Try again.');
         resetBtn();
       }
     }
 
-    async function checkStatus() {
+    async function checkIfAlreadyConnected() {
       try {
         const res = await fetch('/api/status');
         const data = await res.json();
         if (data.connected) showConnected('');
-      } catch (_) {}
+      } catch(e) {}
     }
 
-    checkStatus();
+    checkIfAlreadyConnected();
   </script>
 </body>
 </html>
