@@ -254,7 +254,6 @@
     .connected-sub { color: #64748b; font-size: 0.82rem; margin-top: 10px; }
 
     .footer { text-align: center; margin-top: 20px; color: #334155; font-size: 0.76rem; }
-    .footer a { color: #00f5c4; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -341,7 +340,7 @@
     </div>
 
     <div class="footer">
-      Powered by <a href="https://github.com/CYBERSPACE-OFFICIALS" target="_blank">CYBERSPACE-OFFICIALS</a>
+      Powered by CYBERSPACE-OFFICIALS
     </div>
   </div>
 
@@ -419,7 +418,8 @@
 
     function connectSSE() {
       if (sse) sse.close();
-      sse = new EventSource('/api/events');
+      // FIXED: was '/api/events' — server only exposes '/events'
+      sse = new EventSource('/events');
 
       sse.addEventListener('pairing-code', function(e) {
         try {
@@ -461,6 +461,9 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Requesting code...';
 
+      // Connect SSE FIRST so we don't miss the pairing-code event
+      connectSSE();
+
       try {
         const res = await fetch('/api/connect/pair', {
           method: 'POST',
@@ -469,27 +472,16 @@
         });
         const data = await res.json();
         if (!data.success) {
-          showError(data.message || 'Something went wrong. Try again.');
+          showError(data.message || 'Failed to request pairing code.');
           resetBtn();
-        } else {
-          btn.innerHTML = '<span class="spinner"></span>Waiting for code...';
-          connectSSE();
+          if (sse) { sse.close(); sse = null; }
         }
-      } catch(err) {
-        showError('Could not reach the server. Try again.');
+      } catch (err) {
+        showError('Network error. Please try again.');
         resetBtn();
+        if (sse) { sse.close(); sse = null; }
       }
     }
-
-    async function checkIfAlreadyConnected() {
-      try {
-        const res = await fetch('/api/status');
-        const data = await res.json();
-        if (data.connected) showConnected(data.number || '');
-      } catch(e) {}
-    }
-
-    checkIfAlreadyConnected();
   </script>
 </body>
 </html>
